@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('description');
             $table->dateTime('date_de_publication');
-            $table->foreignId('matriculation')->constrained();
+            $table->string('matriculation');
+            $table->foreign('matriculation')->references('matriculation')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
