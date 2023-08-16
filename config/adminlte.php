@@ -308,7 +308,7 @@ return [
         ],
         [
             'text'    => 'Acceuil',
-            'icon'    => 'fas fa-fw fa-tachometer',
+            'icon'    => 'fas fa-fw fa-tachometer-alt',
             'url'     => '/dashboard'
         ],
         [
@@ -327,7 +327,7 @@ return [
         ],
         [
             'text'    => 'Projet',
-            'icon'    => 'fas fa-fw fa-user',
+            'icon'    => 'fas fa-fw fa-project-diagram',
             'submenu' => [
                 [
                     'text' => 'Liste des Projets',
@@ -341,7 +341,7 @@ return [
         ],
         [
             'text'    => 'Phase',
-            'icon'    => 'fas fa-fw fa-user',
+            'icon'    => 'fas fa-fw fa-tasks',
             'submenu' => [
                 [
                     'text' => 'Liste des Phases',
@@ -355,7 +355,7 @@ return [
         ],
         [
             'text'    => 'Commentaire',
-            'icon'    => 'fas fa-fw fa-user',
+            'icon'    => 'fas fa-fw fa-comments',
             'submenu' => [
                 [
                     'text' => 'Liste des Commentaires',
@@ -369,7 +369,7 @@ return [
         ],
         [
             'text'    => 'Déconnexion',
-            'icon'    => 'fas fa-fw fa-user',
+            'icon'    => 'fas fa-fw fa-sign-out-alt',
             'url'     => '/logout'
         ],
     ],

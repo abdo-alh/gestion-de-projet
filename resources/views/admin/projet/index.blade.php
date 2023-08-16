@@ -60,7 +60,7 @@ Liste des Projets | Application du Gestion de Projet
       </div>
     </div>
   </div>
-  </di>
+</div>
 
   @endsection
 

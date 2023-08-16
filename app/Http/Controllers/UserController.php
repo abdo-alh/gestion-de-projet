@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commentaire;
+use App\Models\Projet;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -15,7 +17,7 @@ class UserController extends Controller
             'logout', 'dashboard'
         ]);
     }
-    
+
     public function register()
     {
         return view('register');
@@ -25,23 +27,23 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'matriculation'=>'required',
-            'nom'=>'required',
-            'prenom'=>'required',
-            'poste'=>'required',
+            'matriculation' => 'required',
+            'nom' => 'required',
+            'prenom' => 'required',
+            'poste' => 'required',
             'profession' => 'required',
             'cin' => 'required',
-            'telephone'=>'required',
+            'telephone' => 'required',
             'email' => 'required|email|max:250|unique:users',
             'password' => 'required'
         ]);
 
         User::create([
-            'matriculation'=>$request->matriculation,
-            'nom'=>$request->nom,
-            'prenom'=>$request->prenom,
-            'poste'=>$request->poste,
-            'profession' =>$request->profession,
+            'matriculation' => $request->matriculation,
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'poste' => $request->poste,
+            'profession' => $request->profession,
             'cin' => $request->cin,
             'telephone' => $request->telephone,
             'email' => $request->email,
@@ -52,9 +54,9 @@ class UserController extends Controller
         Auth::attempt($credentials);
         $request->session()->regenerate();
         return redirect()->route('login')
-        ->withSuccess('You have successfully registered & logged in!');
+            ->withSuccess('You have successfully registered & logged in!');
     }
-    
+
     public function login()
     {
         return view('login');
@@ -62,10 +64,10 @@ class UserController extends Controller
 
     public function authenticate(Request $request)
     {
-       $credentials = $request->validate([
+        $credentials = $request->validate([
             'email' => 'required',
             'password' => 'required'
-      ]);
+        ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -80,11 +82,20 @@ class UserController extends Controller
 
     public function dashboard()
     {
-       // if (Auth::check()) {
-            return view('admin.dashboard');
-      //  }
+        $projets = Projet::all();
+        $employeCount = User::count();
+        $projetCount = Projet::count();
+        $commentaireCount = Commentaire::count();
+        // if (Auth::check()) {
+        return view('admin.dashboard')->with([
+            'projets'  =>  $projets,
+            'employeCount' => $employeCount,
+            'projetCount' => $projetCount,
+            'commentaireCount' => $commentaireCount
+        ]);
+        //  }
 
-      /*  return redirect()->route('login')
+        /*  return redirect()->route('login')
             ->withErrors([
                 'email' => 'Please login to access the dashboard.',
             ])->onlyInput('email');*/
