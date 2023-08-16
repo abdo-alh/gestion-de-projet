@@ -20,7 +20,7 @@ Modifier Commentaire | Application de gestion des projets
                   @method('PUT')
                   <div class="form-group mb-3">
                      <label for="registration_number">Description</label>
-                     <textarea class="form-control" name="description" placeholder="Description...">
+                     <textarea class="form-control" name="description">
                         {{ $commentaire->description }}
                      </textarea>
                   </div>
