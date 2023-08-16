@@ -367,11 +367,6 @@ return [
                 ],
             ],
         ],
-        [
-            'text'    => 'Déconnexion',
-            'icon'    => 'fas fa-fw fa-sign-out-alt',
-            'url'     => '/logout'
-        ],
     ],
 
     /*
