@@ -16,7 +16,8 @@ class Commentaire extends Model
      */
     protected $fillable = [
         'description',
-        'date_de_publication'
+        'date_de_publication',
+        'matriculation'
     ];
 
     public function employe()

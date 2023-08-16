@@ -18,9 +18,10 @@ class Projet extends Model
         'reference',
         'titre',
         'budget',
-        'periodeestimee',
+        'periodeestimeee',
         'datedebut',
-        'datefin'
+        'datefin',
+        'matriculation'
     ];
 
     public function employe()

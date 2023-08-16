@@ -3,43 +3,105 @@
 namespace App\Http\Controllers;
 
 use App\Models\Projet;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjetController extends Controller
 {
     public function index()
     {
         $projets = Projet::all();
-        return view('projets.index', compact('projets'));
+        return view('admin.projet.index', compact('projets'));
     }
 
     public function create()
     {
-        return view('projets.create');
+        $employes = User::all();
+        return view('admin.projet.create', compact('employes'));
     }
 
     public function store(Request $request)
     {
-        Projet::create($request->all());
-        return redirect()->route('projets.index')->with('success', 'Projet created successfully');
+        $request->validate([
+            'reference' => 'required|string|max:255',
+            'titre' => 'required|string|max:255',
+            'budget' => 'required',
+            'periodeestimeee' => 'required',
+            'datedebut' => 'required',
+            'datefin' => 'required',
+            'matriculation' => 'required',
+            // Add validation rules for other fields
+        ]);
+
+        // Create a new Projet instance with the validated data
+        $projet = new Projet([
+            'reference' => $request->input('reference'),
+            'titre' => $request->input('titre'),
+            'budget' => $request->input('budget'),
+            'periodeestimeee' => $request->input('periodeestimeee'),
+            'datedebut' => $request->input('datedebut'),
+            'datefin' => $request->input('datefin'),
+            'matriculation' => $request->input('matriculation'),
+            // Set other fields as needed
+        ]);
+
+        $projet->save(); // Save the record to the database
+
+        return redirect()->route('projet.index')->with('success', 'Projet created successfully');
     }
 
     public function edit($reference)
     {
-        $projet = Projet::find($reference);
-        return view('projets.edit', compact('projet'));
+        $projet = Projet::where('reference', $reference)->first();
+        $employes = User::all();
+        return view('admin.projet.edit')->with([
+            'projet' => $projet,
+            'employes' => $employes
+        ]);
     }
 
     public function update(Request $request, $reference)
     {
-        $projet = Projet::find($reference);
-        $projet->update($request->all());
-        return redirect()->route('projets.index')->with('success', 'Projet updated successfully');
+        $projet = Projet::where('reference', $reference)->first();
+
+        $request->validate([
+            'reference' => 'required|string|max:255',
+            'titre' => 'required|string|max:255',
+            'budget' => 'required',
+            'periodeestimeee' => 'required',
+            'datedebut' => 'required',
+            'datefin' => 'required',
+            'matriculation' => 'required',
+            // Add validation rules for other fields
+        ]);
+
+        $reference = $request->input('reference');
+        $titre = $request->input('titre');
+        $budget = $request->input('budget');
+        $periodeestimeee = $request->input('periodeestimeee');
+        $datedebut = $request->input('datedebut');
+        $datefin = $request->input('datefin');
+        $matriculation = $request->input('matriculation');
+
+        $affected = DB::update('UPDATE projets SET reference = ?, titre = ?, budget = ?, periodeestimeee = ?, datedebut = ?, datefin = ?, 
+        matriculation = ? WHERE reference = ?', [$reference, $titre, $budget, $periodeestimeee, $datedebut, $datefin, $matriculation, $reference]);
+
+        if ($affected) {
+            return redirect()->route('projet.index')->with('success', 'Projet updated successfully');
+        } else {
+            return redirect()->route('projet.index')->with('error', 'Projet not found or update failed');
+        }
     }
 
     public function destroy($reference)
     {
-        Projet::destroy($reference);
-        return redirect()->route('projets.index')->with('success', 'Projet deleted successfully');
+        $deleted = DB::delete('DELETE FROM projets WHERE reference = ?', [$reference]);
+
+        if ($deleted) {
+            return redirect()->route('projet.index')->with('success', 'Projet deleted successfully');
+        } else {
+            return redirect()->route('projet.index')->with('error', 'Projet not found or deletion failed');
+        }
     }
 }

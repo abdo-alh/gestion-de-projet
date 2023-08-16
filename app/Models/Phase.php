@@ -19,7 +19,9 @@ class Phase extends Model
         'duree',
         'date_de_debut',
         'date_de_fin',
-        'statut'
+        'statut',
+        'matriculation',
+        'reference'
     ];
 
     public function employe()
