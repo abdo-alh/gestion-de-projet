@@ -24,7 +24,7 @@ Liste des Phases | Application du Gestion de Projet
           <table id="myTable" class="table table-bordered table-stripped">
             <thead>
               <tr>
-                <th>Nom</th>
+                <th>Nom et Prenom</th>
                 <th>Référence du projet</th>
                 <th>Durée</th>
                 <th>Statut</th>
@@ -34,6 +34,17 @@ Liste des Phases | Application du Gestion de Projet
             </thead>
             <tbody>
               @foreach($phases as $phase)
+              @if (auth()->user()->role == 'user')
+              @if (auth()->user()->email == $phase->employe->email)
+              <tr>
+                <td>{{$phase->nom}}</td>
+                <td>#{{$phase->projet->reference}}</td>
+                <td>{{$phase->duree}}</td>
+                <td>{{$phase->statut}}</td>
+                <td>{{$phase->employe->nom}} {{$phase->employe->prenom}}</td>
+              </tr>
+              @endif
+              @else
               <tr>
                 <td>{{$phase->nom}}</td>
                 <td>#{{$phase->projet->reference}}</td>
@@ -54,6 +65,7 @@ Liste des Phases | Application du Gestion de Projet
 
                 </td>
               </tr>
+              @endif
               @endforeach
             </tbody>
           </table>

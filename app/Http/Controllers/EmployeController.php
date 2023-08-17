@@ -30,7 +30,7 @@ class EmployeController extends Controller
             'nom' => 'required',
             'prenom' => 'required',
             'poste' => 'required',
-            'profession' => 'required',
+            'role' => 'required',
             'cin' => 'required',
             'telephone' => 'required',
             'email' => 'required|email|max:250|unique:users',
@@ -42,7 +42,7 @@ class EmployeController extends Controller
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'poste' => $request->poste,
-            'profession' => $request->profession,
+            'role' => $request->role,
             'cin' => $request->cin,
             'telephone' => $request->telephone,
             'email' => $request->email,
@@ -70,7 +70,7 @@ class EmployeController extends Controller
             'nom' => 'required',
             'prenom' => 'required',
             'poste' => 'required',
-            'profession' => 'required',
+            'role' => 'required',
             'cin' => 'required',
             'telephone' => 'required',
             'email' => 'required|email|max:250',
@@ -92,12 +92,12 @@ class EmployeController extends Controller
         $nom = $request->input('nom');
         $prenom = $request->input('prenom');
         $poste = $request->input('poste');
-        $profession = $request->input('profession');
+        $role = $request->input('role');
         $cin = $request->input('cin');
         $telephone = $request->input('telephone');
         $email = $request->input('email');
-        $affected = DB::update('UPDATE users SET matriculation = ?, nom = ?, prenom = ?, poste = ?, profession = ?, cin = ?, 
-        telephone = ?, email = ? WHERE matriculation = ?', [$matriculation, $nom, $prenom, $poste, $profession, $cin, $telephone, $email, $matriculation]);
+        $affected = DB::update('UPDATE users SET matriculation = ?, nom = ?, prenom = ?, poste = ?, role = ?, cin = ?, 
+        telephone = ?, email = ? WHERE matriculation = ?', [$matriculation, $nom, $prenom, $poste, $role, $cin, $telephone, $email, $matriculation]);
 
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);

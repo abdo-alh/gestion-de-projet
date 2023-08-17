@@ -32,6 +32,19 @@ Liste des Projets | Application du Gestion de Projet
             </thead>
             <tbody>
               @foreach($projets as $projet)
+              @if (auth()->user()->role == 'user')
+              @if (auth()->user()->email == $projet->employe->email)
+              <tr>
+                <td>{{$projet->reference}}</td>
+                <td>{{$projet->titre}}</td>
+                <td>{{$projet->budget}}</td>
+                <td>{{$projet->periodeestimeee}}</td>
+                <td>{{$projet->datedebut}}</td>
+                <td>{{$projet->datefin}}</td>
+                <td>{{$projet->employe->nom}} {{$projet->employe->prenom}}</td>
+              </tr>
+              @endif
+              @else
               <tr>
                 <td>{{$projet->reference}}</td>
                 <td>{{$projet->titre}}</td>
@@ -53,6 +66,7 @@ Liste des Projets | Application du Gestion de Projet
                   </form>
                 </td>
               </tr>
+              @endif
               @endforeach
             </tbody>
           </table>
@@ -62,44 +76,44 @@ Liste des Projets | Application du Gestion de Projet
   </div>
 </div>
 
-  @endsection
+@endsection
 
-  @section('js')
-  <script>
-    $(document).ready(function() {
-      $('#myTable').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-          'copy', 'excel', 'csv', 'pdf', 'print', 'colvis'
-        ]
-      });
+@section('js')
+<script>
+  $(document).ready(function() {
+    $('#myTable').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        'copy', 'excel', 'csv', 'pdf', 'print', 'colvis'
+      ]
     });
+  });
 
-    function deleteEmp(id) {
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          document.getElementById(id).submit();
-        }
-      });
-    }
-  </script>
-  @if(session()->has('success'))
-  <script>
+  function deleteEmp(id) {
     Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: "{{session()->get('success')}}",
-      showConfirmButton: false,
-      timer: 2500
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.getElementById(id).submit();
+      }
     });
-  </script>
-  @endif
-  @endsection
+  }
+</script>
+@if(session()->has('success'))
+<script>
+  Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: "{{session()->get('success')}}",
+    showConfirmButton: false,
+    timer: 2500
+  });
+</script>
+@endif
+@endsection

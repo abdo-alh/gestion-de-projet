@@ -28,6 +28,8 @@ Liste des Commentaires | Application du Gestion de Projet
             </thead>
             <tbody>
               @foreach($commentaires as $commentaire)
+              @if (auth()->user()->role == 'user')
+              @if (auth()->user()->email == $commentaire->employe->email)
               <tr>
                 <td>{{$commentaire->description}}</td>
                 <td>{{$commentaire->date_de_publication}}</td>
@@ -45,6 +47,26 @@ Liste des Commentaires | Application du Gestion de Projet
                   </form>
                 </td>
               </tr>
+              @endif
+              @else
+              <tr>
+                <td>{{$commentaire->description}}</td>
+                <td>{{$commentaire->date_de_publication}}</td>
+                <td>{{$commentaire->employe->nom}} {{$commentaire->employe->prenom}}</td>
+                <td>
+                  <a href="{{route('commentaire.edit',$commentaire->id)}}" class="btn btn-sm btn-warning mx-2">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <form id="{{$commentaire->id}}" action="{{route('commentaire.destroy',$commentaire->id)}}" method="post">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" onClick="return confirm('Voulez-vous vraiment supprimer cette commentaire ?')" class="btn btn-sm btn-danger">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              @endif
               @endforeach
             </tbody>
           </table>

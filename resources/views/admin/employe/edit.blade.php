@@ -63,11 +63,11 @@ Modifier Utilisateur | Laravel
                      <div class="col-md-6">
                         <div class="form-group mb-3">
                            <label for="registration_number">Profession</label>
-                           <select name="profession" class="form-control">
-                              <option value="admin" {{ $user->profession == "admin" ? 'selected' : '' }}>
+                           <select name="role" class="form-control">
+                              <option value="0" {{ $user->role == "admin" ? 'selected' : '' }}>
                                  Admin
                               </option>
-                              <option value="utilisateur" {{ $user->profession == "utilisateur" ? 'selected' : '' }}>
+                              <option value="1" {{ $user->role == "user" ? 'selected' : '' }}>
                                  Utilisateur
                               </option>
                            </select>

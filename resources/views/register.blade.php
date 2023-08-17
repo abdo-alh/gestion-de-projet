@@ -84,9 +84,9 @@
     </div>
     {{-- Profession field --}}
     <div class="input-group mb-3">
-        <select name="profession" class="form-control @error('profession') is-invalid @enderror" id="profession" name="profession" value="{{ old('profession') }}">
-            <option value="admin">Admin</option>
-            <option value="utilisateur">Utilisateur</option>
+        <select name="role" class="form-control @error('role') is-invalid @enderror" id="profession" value="{{ old('role') }}">
+            <option value="0">Admin</option>
+            <option value="1">Utilisateur</option>
         </select>
         <div class="input-group-append">
             <div class="input-group-text">
@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        @error('profession')
+        @error('role')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Commentaire;
+use App\Models\Phase;
 use App\Models\Projet;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,7 @@ class UserController extends Controller
             'nom' => 'required',
             'prenom' => 'required',
             'poste' => 'required',
-            'profession' => 'required',
+            'role' => 'required',
             'cin' => 'required',
             'telephone' => 'required',
             'email' => 'required|email|max:250|unique:users',
@@ -43,7 +44,7 @@ class UserController extends Controller
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'poste' => $request->poste,
-            'profession' => $request->profession,
+            'role' => $request->role,
             'cin' => $request->cin,
             'telephone' => $request->telephone,
             'email' => $request->email,
@@ -83,12 +84,16 @@ class UserController extends Controller
     public function dashboard()
     {
         $projets = Projet::all();
+        $phases = Phase::all();
+        $commentaires = Commentaire::all();
         $employeCount = User::count();
         $projetCount = Projet::count();
         $commentaireCount = Commentaire::count();
         // if (Auth::check()) {
         return view('admin.dashboard')->with([
             'projets'  =>  $projets,
+            'phases'  =>  $phases,
+            'commentaires'  =>  $commentaires,
             'employeCount' => $employeCount,
             'projetCount' => $projetCount,
             'commentaireCount' => $commentaireCount

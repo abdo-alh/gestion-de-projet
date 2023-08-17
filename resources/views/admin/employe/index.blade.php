@@ -38,7 +38,7 @@ Liste des Employes | Laravel Employes App
                 <td>{{$user->prenom}}</td>
                 <td>{{$user->cin}}</td>
                 <td>{{$user->telephone}}</td>
-                <td>{{$user->profession}}</td>
+                <td>{{$user->role}}</td>
                 <td>{{$user->poste}}</td>
                 <td>
                   <a href="{{route('employe.edit',$user->matriculation)}}" class="btn btn-sm btn-warning mx-1">

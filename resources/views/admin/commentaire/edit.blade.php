@@ -30,13 +30,8 @@ Modifier Commentaire | Application de gestion des projets
                   </div>
                   <div class="form-group mb-3">
                      <label for="registration_number">Nom</label>
-                     <select name="user_id" class="form-control">
-                        @foreach($employes as $employe)
-                        <option value="{{ $employe->id }}" {{ $employe->id == $commentaire->user_id ? 'selected' : '' }}>
-                           {{ $employe->nom }} {{ $employe->prenom }}
-                        </option>
-                        @endforeach
-                     </select>
+                     <input type="text" class="form-control" value="{{ auth()->user()->nom }} {{ auth()->user()->prenom }}" readonly>
+                     <input type="hidden" class="form-control" name="user_id" value="{{ auth()->user()->id }}">
                   </div>
                   <div class="form-group">
                      <button type="submit" class="btn btn-primary">

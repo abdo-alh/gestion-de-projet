@@ -55,9 +55,9 @@ Add New Utilisateur | Laravel Clients App
                      <div class="col-md-6">
                         <div class="form-group mb-3">
                            <label for="registration_number">Profession</label>
-                           <select name="profession" class="form-control">
-                              <option value="admin">Admin</option>
-                              <option value="utilisateur">Utilisateur</option>
+                           <select name="role" class="form-control">
+                              <option value="0">Admin</option>
+                              <option value="1">Utilisateur</option>
                            </select>
                         </div>
                      </div>

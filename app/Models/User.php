@@ -23,13 +23,11 @@ class User extends Authenticatable
         'nom',
         'prenom',
         'poste',
-        'profession',
+        'role',
         'cin',
         'telephone',
-        'role',
         'email',
         'password',
-        'profession'
     ];
 
     /**
