@@ -20,17 +20,17 @@ class Phase extends Model
         'date_de_debut',
         'date_de_fin',
         'statut',
-        'matriculation',
-        'reference'
+        'projet_id',
+        'user_id'
     ];
 
     public function employe()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function projet()
     {
-        return $this->hasOne(Projet::class);
+        return $this->belongsTo(Projet::class,'projet_id');
     }
 }

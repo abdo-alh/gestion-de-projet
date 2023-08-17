@@ -22,9 +22,9 @@ Modifier Phase | Application de gestion des projets
                             <div class="col-md-4">
                                 <div class="form-group mb-3">
                                     <label for="registration_number">Réference du projet</label>
-                                    <select name="reference" class="form-control">
+                                    <select name="projet_id" class="form-control">
                                         @foreach($projets as $projet)
-                                        <option value="{{ $projet->reference }}" {{ $projet->reference == $phase->reference ? 'selected' : '' }}>#{{ $projet->reference }}</option>
+                                        <option value="{{ $projet->id }}" {{ $projet->id == $phase->projet_id ? 'selected' : '' }}>#{{ $projet->reference }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -76,9 +76,9 @@ Modifier Phase | Application de gestion des projets
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="registration_number">Respensable de la phase</label>
-                                    <select name="matriculation" class="form-control">
+                                    <select name="user_id" class="form-control">
                                         @foreach($employes as $employe)
-                                        <option value="{{ $employe->matriculation }}" {{ $employe->matriculation == $phase->matriculation ? 'selected' : '' }}>
+                                        <option value="{{ $employe->id }}" {{ $employe->id == $phase->user_id ? 'selected' : '' }}>
                                             {{ $employe->nom }} {{ $employe->prenom }}
                                         </option>
                                         @endforeach

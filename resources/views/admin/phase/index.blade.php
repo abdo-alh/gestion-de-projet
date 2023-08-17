@@ -36,7 +36,7 @@ Liste des Phases | Application du Gestion de Projet
               @foreach($phases as $phase)
               <tr>
                 <td>{{$phase->nom}}</td>
-                <td>#{{$phase->reference}}</td>
+                <td>#{{$phase->projet->reference}}</td>
                 <td>{{$phase->duree}}</td>
                 <td>{{$phase->statut}}</td>
                 <td>{{$phase->employe->nom}} {{$phase->employe->prenom}}</td>

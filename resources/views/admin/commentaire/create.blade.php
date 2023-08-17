@@ -24,13 +24,13 @@ Ajouter Nouveau Commentaire | Application de gestion des projets
                   </div>
                   <div class="form-group mb-3">
                      <label for="registration_number">Date de publication</label>
-                     <input type="date" class="form-control" name="date_de_publication" placeholder="Date de publication" value="{{old('date_de_publication')}}">
+                     <input type="datetime-local" class="form-control" name="date_de_publication" placeholder="Date de publication" value="{{old('date_de_publication')}}">
                   </div>
                   <div class="form-group mb-3">
                      <label for="registration_number">Nom</label>
-                     <select name="matriculation" class="form-control">
+                     <select name="user_id" class="form-control">
                         @foreach($employes as $employe)
-                        <option value="{{ $employe->matriculation }}">{{ $employe->nom }} {{ $employe->prenom }}</option>
+                        <option value="{{ $employe->id }}">{{ $employe->nom }} {{ $employe->prenom }}</option>
                         @endforeach
                      </select>
                   </div>

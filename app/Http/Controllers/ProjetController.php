@@ -23,31 +23,7 @@ class ProjetController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'reference' => 'required|string|max:255',
-            'titre' => 'required|string|max:255',
-            'budget' => 'required',
-            'periodeestimeee' => 'required',
-            'datedebut' => 'required',
-            'datefin' => 'required',
-            'matriculation' => 'required',
-            // Add validation rules for other fields
-        ]);
-
-        // Create a new Projet instance with the validated data
-        $projet = new Projet([
-            'reference' => $request->input('reference'),
-            'titre' => $request->input('titre'),
-            'budget' => $request->input('budget'),
-            'periodeestimeee' => $request->input('periodeestimeee'),
-            'datedebut' => $request->input('datedebut'),
-            'datefin' => $request->input('datefin'),
-            'matriculation' => $request->input('matriculation'),
-            // Set other fields as needed
-        ]);
-
-        $projet->save(); // Save the record to the database
-
+        Projet::create($request->all());
         return redirect()->route('projet.index')->with('success', 'Projet created successfully');
     }
 
