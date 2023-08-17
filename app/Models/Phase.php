@@ -26,11 +26,11 @@ class Phase extends Model
 
     public function employe()
     {
-        return $this->belongsTo(User::class,'matriculation');
+        return $this->hasOne(User::class);
     }
 
     public function projet()
     {
-        return $this->belongsTo(Projet::class);
+        return $this->hasOne(Projet::class);
     }
 }

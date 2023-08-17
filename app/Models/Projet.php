@@ -26,7 +26,7 @@ class Projet extends Model
 
     public function employe()
     {
-        return $this->belongsTo(User::class,'matriculation');
+        return $this->hasOne(User::class);
     }
 
 
