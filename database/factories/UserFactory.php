@@ -20,16 +20,16 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'matriculation' => 'm1',
-            'nom' => 'abdo',
-            'prenom' => 'abdo',
+            'matriculation' => 'm2',
+            'nom' => 'amine',
+            'prenom' => 'amine',
             'poste' => 'modir',
-            'profession' => 'admin',
-            'cin' => 'EE565656',
-            'telephone' => '0677888899',
-            'email' => 'admin@gmail.com',
+            'role' => 1,
+            'cin' => 'EE888888',
+            'telephone' => '0677777777',
+            'email' => 'user@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('admin1234'), // password
+            'password' => Hash::make('user1234'), // password
             'remember_token' => Str::random(10),
         ];
     }

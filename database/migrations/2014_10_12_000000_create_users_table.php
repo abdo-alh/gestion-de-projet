@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->string('poste');
-            $table->string('profession');
+            //0 = Admin, 1 = User
+            $table->tinyInteger('role');
             $table->string('cin')->unique();
             $table->string('telephone')->unique();
             $table->string('email')->unique();
