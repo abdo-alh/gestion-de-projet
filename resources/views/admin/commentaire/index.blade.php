@@ -31,7 +31,7 @@ Liste des Commentaires | Application du Gestion de Projet
               <tr>
                 <td>{{$commentaire->description}}</td>
                 <td>{{$commentaire->date_de_publication}}</td>
-                <td>{{$commentaire->matriculation}}</td>
+                <td>{{$commentaire->employe->nom}} {{$commentaire->employe->prenom}}</td>
                 <td>
                   <a href="{{route('commentaire.edit',$commentaire->id)}}" class="btn btn-sm btn-warning mx-2">
                     <i class="fas fa-edit"></i>

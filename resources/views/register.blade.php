@@ -1,116 +1,184 @@
-@extends('layouts.app')
+@extends('adminlte::auth.auth-page', ['auth_type' => 'register'])
 
-@section('content')
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-8">
+@php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
+@php( $register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register') )
 
-            <div class="card">
-                <div class="card-header">Register</div>
-                <div class="card-body">
-                    <form action="{{ route('store') }}" method="post">
-                        @csrf
-                        <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Matriculation</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control @error('matriculation') is-invalid @enderror"
-                                    id="matriculation" name="matriculation" value="{{ old('matriculation') }}">
-                                @if ($errors->has('matriculation'))
-                                    <span class="text-danger">{{ $errors->first('matriculation') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="nom" class="col-md-4 col-form-label text-md-end text-start">Nom</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control @error('nom') is-invalid @enderror" id="nom"
-                                    name="nom" value="{{ old('nom') }}">
-                                @if ($errors->has('nom'))
-                                    <span class="text-danger">{{ $errors->first('nom') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="prenom" class="col-md-4 col-form-label text-md-end text-start">Prenom</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control @error('prenom') is-invalid @enderror"
-                                    id="prenom" name="prenom" value="{{ old('prenom') }}">
-                                @if ($errors->has('prenom'))
-                                    <span class="text-danger">{{ $errors->first('prenom') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="poste" class="col-md-4 col-form-label text-md-end text-start">Poste</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control @error('poste') is-invalid @enderror"
-                                    id="poste" name="poste" value="{{ old('poste') }}">
-                                @if ($errors->has('poste'))
-                                    <span class="text-danger">{{ $errors->first('poste') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="profession"
-                                class="col-md-4 col-form-label text-md-end text-start">Profession</label>
-                            <div class="col-md-6">
-                                <select name="profession" class="form-control @error('profession') is-invalid @enderror"
-                                    id="profession" name="profession" value="{{ old('profession') }}">
-                                    <option value="admin">Admin</option>
-                                    <option value="utilisateur">Utilisateur</option>
-                                    @if ($errors->has('profession'))
-                                        <span class="text-danger">{{ $errors->first('profession') }}</span>
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="cin" class="col-md-4 col-form-label text-md-end text-start">CIN</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control @error('cin') is-invalid @enderror" id="cin"
-                                    name="cin" value="{{ old('cin') }}">
-                                @if ($errors->has('cin'))
-                                    <span class="text-danger">{{ $errors->first('cin') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="telephone" class="col-md-4 col-form-label text-md-end text-start">Telephone</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control @error('telephone') is-invalid @enderror"
-                                    id="telephone" name="telephone" value="{{ old('telephone') }}">
-                                @if ($errors->has('telephone'))
-                                    <span class="text-danger">{{ $errors->first('telephone') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="email" class="col-md-4 col-form-label text-md-end text-start">Email
-                                Address</label>
-                            <div class="col-md-6">
-                                <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                    id="email" name="email" value="{{ old('email') }}">
-                                @if ($errors->has('email'))
-                                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="password" class="col-md-4 col-form-label text-md-end text-start">Password</label>
-                            <div class="col-md-6">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    id="password" name="password">
-                                @if ($errors->has('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Register">
-                        </div>
+@if (config('adminlte.use_route_url', false))
+@php( $login_url = $login_url ? route($login_url) : '' )
+@php( $register_url = $register_url ? route($register_url) : '' )
+@else
+@php( $login_url = $login_url ? url($login_url) : '' )
+@php( $register_url = $register_url ? url($register_url) : '' )
+@endif
 
-                    </form>
-                </div>
+@section('auth_header', __('adminlte::adminlte.register_message'))
+
+@section('auth_body')
+<form action="{{ route('store') }}" method="post">
+    @csrf
+
+    {{-- Matriculation field --}}
+    <div class="input-group mb-3">
+        <input type="text" name="matriculation" class="form-control @error('matriculation') is-invalid @enderror" value="{{ old('matriculation') }}" placeholder="Matriculation" autofocus>
+
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
             </div>
         </div>
+
+        @error('matriculation')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
     </div>
-@endsection
+
+    {{-- Nom field --}}
+    <div class="input-group mb-3">
+        <input type="text" name="nom" class="form-control @error('nom') is-invalid @enderror" value="{{ old('nom') }}" placeholder="Nom">
+
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+            </div>
+        </div>
+
+        @error('nom')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+    {{-- Prenom field --}}
+    <div class="input-group mb-3">
+        <input type="text" name="prenom" class="form-control @error('prenom') is-invalid @enderror" value="{{ old('prenom') }}" placeholder="Prenom">
+
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+            </div>
+        </div>
+
+        @error('prenom')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+    {{-- Poste field --}}
+    <div class="input-group mb-3">
+        <input type="text" name="poste" class="form-control @error('poste') is-invalid @enderror" value="{{ old('poste') }}" placeholder="Poste">
+
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+            </div>
+        </div>
+
+        @error('poste')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+    {{-- Profession field --}}
+    <div class="input-group mb-3">
+        <select name="profession" class="form-control @error('profession') is-invalid @enderror" id="profession" name="profession" value="{{ old('profession') }}">
+            <option value="admin">Admin</option>
+            <option value="utilisateur">Utilisateur</option>
+        </select>
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+            </div>
+        </div>
+
+        @error('profession')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+    {{-- CIN field --}}
+    <div class="input-group mb-3">
+        <input type="text" name="cin" class="form-control @error('cin') is-invalid @enderror" value="{{ old('cin') }}" placeholder="CIN">
+
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+            </div>
+        </div>
+
+        @error('cin')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+    {{-- Telephone field --}}
+    <div class="input-group mb-3">
+        <input type="text" name="telephone" class="form-control @error('telephone') is-invalid @enderror" value="{{ old('telephone') }}" placeholder="0612345678">
+
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+            </div>
+        </div>
+
+        @error('telephone')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+    {{-- Email field --}}
+    <div class="input-group mb-3">
+        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}">
+
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+            </div>
+        </div>
+
+        @error('email')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+
+    {{-- Password field --}}
+    <div class="input-group mb-3">
+        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('adminlte::adminlte.password') }}">
+
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+            </div>
+        </div>
+
+        @error('password')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+
+    {{-- Register button --}}
+    <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
+        <span class="fas fa-user-plus"></span>
+        {{ __('adminlte::adminlte.register') }}
+    </button>
+
+</form>
+@stop
+
+@section('auth_footer')
+<p class="my-0">
+    <a href="{{ route('login') }}">
+        {{ __('adminlte::adminlte.i_already_have_a_membership') }}
+    </a>
+</p>
+@stop

@@ -81,7 +81,7 @@
                                 <td>{{$projet->periodeestimeee}}</td>
                                 <td>{{$projet->datedebut}}</td>
                                 <td>{{$projet->datefin}}</td>
-                                <td>{{$projet->matriculation}}</td>
+                                <td>{{$projet->employe->nom}} {{$projet->employe->prenom}}</td>
                             </tr>
                             @endforeach
                         </tbody>

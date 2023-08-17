@@ -39,7 +39,7 @@ Liste des Projets | Application du Gestion de Projet
                 <td>{{$projet->periodeestimeee}}</td>
                 <td>{{$projet->datedebut}}</td>
                 <td>{{$projet->datefin}}</td>
-                <td>{{$projet->matriculation}}</td>
+                <td>{{$projet->employe->nom}} {{$projet->employe->prenom}}</td>
                 <td>
                   <a href="{{route('projet.edit',$projet->reference)}}" class="btn btn-sm btn-warning mx-2">
                     <i class="fas fa-edit"></i>
