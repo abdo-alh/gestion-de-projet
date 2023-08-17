@@ -14,11 +14,127 @@
                 {{-- Configured sidebar links --}}
                 @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item')
 
+
+                <li class="nav-item has-treeview">
+                    <a class="nav-link  " href="">
+                        <i class="fas fa-fw fa-user "></i>
+                        <p>
+                            Employé
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('employe.index') }}">
+                                <i class="far fa-fw fa-circle "></i>
+                                <p>
+                                    Liste des Employés
+                                </p>
+                            </a>
+                        </li>
+                        @if (auth()->user()->role == 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('employe.create') }}">
+                                <i class="far fa-fw fa-circle "></i>
+                                <p>
+                                    Ajouter
+                                </p>
+                            </a>
+                        </li>
+                        @endif
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a class="nav-link  " href="">
+                        <i class="fas fa-fw fa-project-diagram"></i>
+                        <p>
+                            Projet
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('projet.index') }}">
+                                <i class="far fa-fw fa-circle "></i>
+                                <p>
+                                    Liste des Projets
+                                </p>
+                            </a>
+                        </li>
+                        @if (auth()->user()->role == 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('projet.create') }}">
+                                <i class="far fa-fw fa-circle "></i>
+                                <p>
+                                    Ajouter
+                                </p>
+                            </a>
+                        </li>
+                        @endif
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a class="nav-link  " href="">
+                        <i class="fas fa-fw fa-tasks"></i>
+                        <p>
+                            Phase
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('phase.index') }}">
+                                <i class="far fa-fw fa-circle "></i>
+                                <p>
+                                    Liste des Phases
+                                </p>
+                            </a>
+                        </li>
+                        @if (auth()->user()->role == 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('phase.create') }}">
+                                <i class="far fa-fw fa-circle "></i>
+                                <p>
+                                    Ajouter
+                                </p>
+                            </a>
+                        </li>
+                        @endif
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a class="nav-link  " href="">
+                        <i class="fas fa-fw fa-comments"></i>
+                        <p>
+                            Commentaire
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('commentaire.index') }}">
+                                <i class="far fa-fw fa-circle "></i>
+                                <p>
+                                    Liste des Commentaires
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('commentaire.create') }}">
+                                <i class="far fa-fw fa-circle "></i>
+                                <p>
+                                    Ajouter
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 {{-- Custom logout link --}}
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
-                        <i class="fas fa-sign-out-alt"></i> {{ __('adminlte::adminlte.log_out') }}
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
                     </a>
                 </form>
             </ul>

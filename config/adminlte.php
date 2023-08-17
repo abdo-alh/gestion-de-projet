@@ -311,62 +311,6 @@ return [
             'icon'    => 'fas fa-fw fa-tachometer-alt',
             'url'     => '/dashboard'
         ],
-        [
-            'text'    => 'Employé',
-            'icon'    => 'fas fa-fw fa-user',
-            'submenu' => [
-                [
-                    'text' => 'Liste des Employés',
-                    'url'  => '/employe/index',
-                ],
-                [
-                    'text' => 'Ajouter',
-                    'url'  => '/employe/create',
-                ],
-            ],
-        ],
-        [
-            'text'    => 'Projet',
-            'icon'    => 'fas fa-fw fa-project-diagram',
-            'submenu' => [
-                [
-                    'text' => 'Liste des Projets',
-                    'url'  => '/projet/index',
-                ],
-                [
-                    'text' => 'Ajouter Projet',
-                    'url'  => '/projet/create',
-                ],
-            ],
-        ],
-        [
-            'text'    => 'Phase',
-            'icon'    => 'fas fa-fw fa-tasks',
-            'submenu' => [
-                [
-                    'text' => 'Liste des Phases',
-                    'url'  => '/phase/index',
-                ],
-                [
-                    'text' => 'Ajouter Phase',
-                    'url'  => '/phase/create',
-                ],
-            ],
-        ],
-        [
-            'text'    => 'Commentaire',
-            'icon'    => 'fas fa-fw fa-comments',
-            'submenu' => [
-                [
-                    'text' => 'Liste des Commentaires',
-                    'url'  => '/commentaire/index',
-                ],
-                [
-                    'text' => 'Ajouter Commentaire',
-                    'url'  => '/commentaire/create',
-                ],
-            ],
-        ],
     ],
 
     /*
