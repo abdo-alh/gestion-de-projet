@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('projets', function (Blueprint $table) {
-            $table->string('reference')->primary();
+            $table->id();
+            $table->string('reference');
             $table->string('titre');
             $table->float('budget');
             $table->integer('periodeestimeee');
             $table->date('datedebut');
             $table->date('datefin');
-            $table->string('matriculation');
-            $table->foreign('matriculation')->references('matriculation')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

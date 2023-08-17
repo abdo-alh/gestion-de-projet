@@ -18,10 +18,8 @@ return new class extends Migration
             $table->date('date_de_debut');
             $table->date('date_de_fin');
             $table->string('statut');
-            $table->string('matriculation');
-            $table->string('reference');
-            $table->foreign('matriculation')->references('matriculation')->on('users')->onDelete('cascade');
-            $table->foreign('reference')->references('reference')->on('projets')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('projet_id')->constrained();
             $table->timestamps();
         });
     }
