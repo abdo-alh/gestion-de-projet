@@ -39,7 +39,7 @@ Liste des Phases | Application du Gestion de Projet
                 <td>#{{$phase->reference}}</td>
                 <td>{{$phase->duree}}</td>
                 <td>{{$phase->statut}}</td>
-                <td>{{$phase->matriculation}}</td>
+                <td>{{$phase->employe->nom}} {{$phase->employe->prenom}}</td>
                 <td>
                   <a href="{{route('phase.edit',$phase->id)}}" class="btn btn-sm btn-warning mx-2">
                     <i class="fas fa-edit"></i>
