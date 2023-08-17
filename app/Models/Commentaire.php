@@ -17,11 +17,11 @@ class Commentaire extends Model
     protected $fillable = [
         'description',
         'date_de_publication',
-        'matriculation'
+        'user_id'
     ];
 
     public function employe()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 }

@@ -61,10 +61,10 @@ Ajouter Nouveau Projet | Application de gestion des projets
                      </div>
                      <div class="col-md-6">
                         <label for="registration_number">Chef de Projet</label>
-                        <select name="matriculation" class="form-control">
+                        <select name="user_id" class="form-control">
                            <option value="">Select Employee</option>
                            @foreach($employes as $employe)
-                             <option value="{{ $employe->matriculation }}">{{ $employe->nom }} {{ $employe->prenom }}</option>
+                             <option value="{{ $employe->id }}">{{ $employe->nom }} {{ $employe->prenom }}</option>
                            @endforeach
                         </select>
                      </div>

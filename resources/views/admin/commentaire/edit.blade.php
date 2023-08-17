@@ -21,7 +21,7 @@ Modifier Commentaire | Application de gestion des projets
                   <div class="form-group mb-3">
                      <label for="registration_number">Description</label>
                      <textarea class="form-control" name="description">
-                        {{ $commentaire->description }}
+                     {{ $commentaire->description }}
                      </textarea>
                   </div>
                   <div class="form-group mb-3">
@@ -30,9 +30,9 @@ Modifier Commentaire | Application de gestion des projets
                   </div>
                   <div class="form-group mb-3">
                      <label for="registration_number">Nom</label>
-                     <select name="matriculation" class="form-control">
+                     <select name="user_id" class="form-control">
                         @foreach($employes as $employe)
-                        <option value="{{ $employe->matriculation }}" {{ $employe->matriculation == $commentaire->matriculation ? 'selected' : '' }}>
+                        <option value="{{ $employe->id }}" {{ $employe->id == $commentaire->user_id ? 'selected' : '' }}>
                            {{ $employe->nom }} {{ $employe->prenom }}
                         </option>
                         @endforeach
@@ -48,6 +48,6 @@ Modifier Commentaire | Application de gestion des projets
          </div>
       </div>
    </div>
-   </di>
+</div>
 
-   @endsection
+@endsection

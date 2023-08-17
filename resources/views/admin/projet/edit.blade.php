@@ -62,9 +62,9 @@ Modifier Projet | Application de gestion des projets
                      </div>
                      <div class="col-md-6">
                         <label for="registration_number">Chef de Projet</label>
-                        <select name="matriculation" class="form-control">
+                        <select name="user_id" class="form-control">
                            @foreach($employes as $employe)
-                           <option value="{{ $employe->matriculation }}" {{ $employe->matriculation == $projet->matriculation ? 'selected' : '' }}>
+                           <option value="{{ $employe->id }}" {{ $employe->id == $projet->user_id ? 'selected' : '' }}>
                               {{ $employe->nom }} {{ $employe->prenom }}
                            </option>
                            @endforeach

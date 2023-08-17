@@ -21,12 +21,12 @@ class Projet extends Model
         'periodeestimeee',
         'datedebut',
         'datefin',
-        'matriculation'
+        'user_id'
     ];
 
     public function employe()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
 
