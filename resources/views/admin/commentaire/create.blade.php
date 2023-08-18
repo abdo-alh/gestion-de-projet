@@ -19,8 +19,7 @@ Ajouter Nouveau Commentaire | Application de gestion des projets
                   @csrf
                   <div class="form-group mb-3">
                      <label for="registration_number">Description</label>
-                     <textarea class="form-control" name="description" value="{{old('description')}}">
-                      </textarea>
+                     <textarea class="form-control" name="description">{{old('description')}}</textarea>
                   </div>
                   <div class="form-group mb-3">
                      <label for="registration_number">Date de publication</label>

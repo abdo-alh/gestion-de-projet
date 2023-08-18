@@ -34,9 +34,24 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', 'dashboard')->name('dashboard');
         Route::post('/logout', 'logout')->name('logout');
     });
+
+    Route::prefix('/projet')->controller(ProjetController::class)->group(function () {
+        Route::get('/index', 'index')->name('projet.index');
+    });
+    Route::prefix('/commentaire')->controller(CommentaireController::class)->group(function () {
+        Route::get('/create', 'create')->name('commentaire.create');
+        Route::post('/store', 'store')->name('commentaire.store');
+        Route::get('/index', 'index')->name('commentaire.index');
+        Route::get('/edit/{id}', 'edit')->name('commentaire.edit');
+        Route::put('/update/{id}', 'update')->name('commentaire.update');
+        Route::delete('/delete/{id}', 'destroy')->name('commentaire.destroy');
+    });
+    Route::prefix('/phase')->controller(PhaseController::class)->group(function () {
+        Route::get('/index', 'index')->name('phase.index');
+    });
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'user-role:admin'])->group(function () {
 
     Route::prefix('/employe')->controller(EmployeController::class)->group(function () {
         Route::get('/create', 'create')->name('employe.create');
@@ -51,7 +66,6 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('/projet')->controller(ProjetController::class)->group(function () {
         Route::get('/create', 'create')->name('projet.create');
         Route::post('/store', 'store')->name('projet.store');
-        Route::get('/index', 'index')->name('projet.index');
         Route::get('/edit/{reference}', 'edit')->name('projet.edit');
         Route::put('/update/{reference}', 'update')->name('projet.update');
         Route::delete('/delete/{reference}', 'destroy')->name('projet.destroy');
@@ -59,17 +73,8 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('/phase')->controller(PhaseController::class)->group(function () {
         Route::get('/create', 'create')->name('phase.create');
         Route::post('/store', 'store')->name('phase.store');
-        Route::get('/index', 'index')->name('phase.index');
         Route::get('/edit/{id}', 'edit')->name('phase.edit');
         Route::put('/update/{id}', 'update')->name('phase.update');
         Route::delete('/delete/{id}', 'destroy')->name('phase.destroy');
-    });
-    Route::prefix('/commentaire')->controller(CommentaireController::class)->group(function () {
-        Route::get('/create', 'create')->name('commentaire.create');
-        Route::post('/store', 'store')->name('commentaire.store');
-        Route::get('/index', 'index')->name('commentaire.index');
-        Route::get('/edit/{id}', 'edit')->name('commentaire.edit');
-        Route::put('/update/{id}', 'update')->name('commentaire.update');
-        Route::delete('/delete/{id}', 'destroy')->name('commentaire.destroy');
     });
 });
