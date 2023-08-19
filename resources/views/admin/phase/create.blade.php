@@ -22,6 +22,7 @@ Ajouter Nouveau Phase | Application de gestion des projets
                         <div class="form-group mb-3">
                            <label for="registration_number">Réference du projet</label>
                            <select name="projet_id" class="form-control">
+                              <option>Sélectionner Reference </option>
                               @foreach($projets as $projet)
                               <option value="{{ $projet->id }}">#{{ $projet->reference }}</option>
                               @endforeach
@@ -70,6 +71,7 @@ Ajouter Nouveau Phase | Application de gestion des projets
                         <div class="form-group mb-3">
                            <label for="registration_number">Respensable de la phase</label>
                            <select name="user_id" class="form-control">
+                              <option>Sélectionner Un Employe </option>
                               @foreach($employes as $employe)
                               <option value="{{ $employe->id }}">{{ $employe->nom }} {{ $employe->prenom }} - {{ $employe->poste }}</option>
                               @endforeach

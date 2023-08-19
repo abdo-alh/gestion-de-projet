@@ -26,13 +26,13 @@ class EmployeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'matriculation' => 'required',
+            'matriculation' => 'required|unique:users',
             'nom' => 'required',
             'prenom' => 'required',
             'poste' => 'required',
             'role' => 'required',
-            'cin' => 'required',
-            'telephone' => 'required',
+            'cin' => 'required|unique:users',
+            'telephone' => 'required|unique:users',
             'email' => 'required|email|max:250|unique:users',
             'password' => 'required'
         ]);
@@ -49,11 +49,11 @@ class EmployeController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        $credentials = $request->only('email', 'password');
-        Auth::attempt($credentials);
-        $request->session()->regenerate();
+        //$credentials = $request->only('email', 'password');
+        //Auth::attempt($credentials);
+        //$request->session()->regenerate();
         return redirect()->route('employe.index')
-            ->withSuccess('You have successfully registered & logged in!');
+            ->withSuccess('You have successfully registered');
     }
     public function edit($matriculation)
     {

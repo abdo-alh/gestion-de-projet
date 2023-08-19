@@ -20,7 +20,7 @@ Add New Utilisateur | Laravel Clients App
                      <div class="col-md-4">
                         <div class="form-group mb-3">
                            <label for="registration_number">Matriculation</label>
-                           <input type="text" maxlength="8" class="form-control" name="matriculation" placeholder="Matriculationr" value="{{old('matriculation')}}">
+                           <input type="text" maxlength="8" class="form-control" name="matriculation" placeholder="Matriculation" value="{{old('matriculation')}}">
                         </div>
                      </div>
                      <div class="col-md-4">

@@ -23,7 +23,26 @@ class ProjetController extends Controller
 
     public function store(Request $request)
     {
-        Projet::create($request->all());
+        $request->validate([
+            'reference' => 'required|string|unique:projets',
+            'titre' => 'required|string|max:255',
+            'budget' => 'required',
+            'periodeestimeee' => 'required',
+            'datedebut' => 'required',
+            'datefin' => 'required',
+            'user_id' => 'required',
+            // Add validation rules for other fields
+        ]);
+
+        Projet::create([
+            'reference' => $request->reference,
+            'titre' => $request->titre,
+            'budget' =>$request->budget,
+            'periodeestimeee' => $request->periodeestimeee,
+            'datedebut' => $request->datedebut,
+            'datefin' => $request->datefin,
+            'user_id' => $request->user_id,
+        ]);
         return redirect()->route('projet.index')->with('success', 'Projet created successfully');
     }
 
@@ -42,7 +61,7 @@ class ProjetController extends Controller
         $projet = Projet::where('reference', $reference)->first();
 
         $request->validate([
-            'reference' => 'required|string|max:255',
+            'reference' => 'required|string|unique:projets',
             'titre' => 'required|string|max:255',
             'budget' => 'required',
             'periodeestimeee' => 'required',
