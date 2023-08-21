@@ -98,12 +98,8 @@ class EmployeController extends Controller
         $email = $request->input('email');
         $affected = DB::update('UPDATE users SET matriculation = ?, nom = ?, prenom = ?, poste = ?, role = ?, cin = ?, 
         telephone = ?, email = ? WHERE matriculation = ?', [$matriculation, $nom, $prenom, $poste, $role, $cin, $telephone, $email, $matriculation]);
-
-        $credentials = $request->only('email', 'password');
-        Auth::attempt($credentials);
-        $request->session()->regenerate();
         return redirect()->route('employe.index')
-            ->withSuccess('You have successfully registered & logged in!');
+            ->withSuccess('You have successfully registered');
     }
     public function destroy($matriculation)
     {
